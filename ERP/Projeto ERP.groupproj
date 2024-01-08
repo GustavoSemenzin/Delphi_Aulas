@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{4CBA06A1-7F42-4255-8F56-DF6564062A3F}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ERP.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="pkg\Entities.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ERP">
+        <MSBuild Projects="ERP.dproj"/>
+    </Target>
+    <Target Name="ERP:Clean">
+        <MSBuild Projects="ERP.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ERP:Make">
+        <MSBuild Projects="ERP.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Entities">
+        <MSBuild Projects="pkg\Entities.dproj"/>
+    </Target>
+    <Target Name="Entities:Clean">
+        <MSBuild Projects="pkg\Entities.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Entities:Make">
+        <MSBuild Projects="pkg\Entities.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ERP;Entities"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ERP:Clean;Entities:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ERP:Make;Entities:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
